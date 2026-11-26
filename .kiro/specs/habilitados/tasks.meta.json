@@ -1,0 +1,102 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "**1. Implementar validación de entrada y límites en `POST /habilitados`**": [
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731320926
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731325157
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731446696
+      }
+    ],
+    "**2. Implementar el servicio de cálculo de cursos habilitados**": [
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731321019
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731448689
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731587924
+      }
+    ],
+    "**3. Integrar el *endpoint* y el manejo seguro de errores**": [
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731321060
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731590529
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731669758
+      }
+    ],
+    "**4. Escribir pruebas unitarias y de integración con cobertura `>= 80 %`**": [
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731321108
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731671607
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731840892
+      }
+    ],
+    "**5. Configurar *gates* de calidad, SCA, secretos y SAST en `ci.yml`**": [
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731321143
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731842979
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795732259986
+      }
+    ],
+    "**6. Completar `TRAZABILIDAD.md` y revisar cierre**": [
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795731321194
+      },
+      {
+        "executionId": "c22dc13b-c06f-4b9a-8506-95727caaefeb",
+        "chatSessionId": "sess_27d5836c-d12d-4235-bb16-97621423177c",
+        "timestamp": 1795732261900
+      }
+    ]
+  }
+}
