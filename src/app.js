@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const repositorio = require('./data/repositorio');
+const { noEncontrado, manejadorErrores } = require('./middleware/errores');
 
 const app = express();
 
@@ -11,6 +12,12 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', cursos: repositorio.listar().length });
 });
 
-// Aquí se montará el router de cursos: app.use('/cursos', require('./routes/cursos'));
+app.use('/cursos', require('./routes/cursos'));
+
+// 404 — ruta no encontrada
+app.use(noEncontrado);
+
+// 500 — errores no controlados
+app.use(manejadorErrores);
 
 module.exports = app;

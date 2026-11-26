@@ -1,14 +1,14 @@
-# Requisitos: Consulta de cursos
+﻿# Requirements: Consulta de cursos
 
-## Introducción
+## Introduction
 
 Funcionalidad para consultar los cursos de la malla y el detalle de un curso con sus requisitos.
 
-## Requisitos
+## Requirements
 
-### Requisito 1: Listar cursos
+### Requirement 1: Listar cursos
 
-**Historia de usuario:** Como alumno, quiero ver los cursos de la malla, para planificar mi matrícula.
+**User Story:** Como alumno, quiero ver los cursos de la malla, para planificar mi matrícula.
 
 #### Criterios de aceptación
 
@@ -18,9 +18,9 @@ Funcionalidad para consultar los cursos de la malla y el detalle de un curso con
 
 1.3 SI el parámetro `ciclo` no es un entero entre 5 y 10, EL sistema DEBE responder 400 con un mensaje de error.
 
-### Requisito 2: Detalle de un curso
+### Requirement 2: Detalle de un curso
 
-**Historia de usuario:** Como alumno, quiero ver el detalle de un curso, para saber qué cursos debo aprobar antes.
+**User Story:** Como alumno, quiero ver el detalle de un curso, para saber qué cursos debo aprobar antes.
 
 #### Criterios de aceptación
 
@@ -28,9 +28,9 @@ Funcionalidad para consultar los cursos de la malla y el detalle de un curso con
 
 2.2 SI el código no existe, EL sistema DEBE responder 404.
 
-### Requisito 3: Calidad del servicio
+### Requirement 3: Calidad del servicio
 
-**Historia de usuario:** Como alumno, quiero un servicio confiable, para consultar la malla sin problemas.
+**User Story:** Como alumno, quiero un servicio confiable, para consultar la malla sin problemas.
 
 #### Criterios de aceptación
 
