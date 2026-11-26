@@ -44,7 +44,7 @@ Instrucciones de ejecución:
   - Verificar que el *pipeline* corra y el último *run* en `main` quede en verde.
   - _Requisitos: 3.1_
 
-- [-] **6. Completar `TRAZABILIDAD.md` y revisar cierre**
+- [x] **6. Completar `TRAZABILIDAD.md` y revisar cierre**
   - Mapear cada requisito no funcional a su *gate* o test correspondiente.
   - Registrar evidencia del estado fallido previo y del estado corregido (test fallido antes de la corrección o *run* fallido y *run* corregido / en verde; si aplica, diagnóstico o justificación en `.gitleaksignore`).
   - Documentar **2 cambios concretos** realizados sobre la propuesta de Kiro: qué propuso Kiro, qué cambiaste y por qué.
