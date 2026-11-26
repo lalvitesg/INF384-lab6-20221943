@@ -1,0 +1,5 @@
+# .gitleaksignore
+# Supresión de falsos positivos para Gitleaks
+# Formato: <hash-commit>:<ruta>:<línea>
+# Agregar entradas aquí cuando un hallazgo sea confirmado como falso positivo.
+# config/ejemplo.env contiene valores de ejemplo, no credenciales reales.

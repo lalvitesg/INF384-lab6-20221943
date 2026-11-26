@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # necesario para que gitleaks analice el historial completo
 
       - uses: actions/setup-node@v4
         with:
@@ -20,5 +22,25 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Ejecutar pruebas
-        run: npm test
+      # ── Gate 1: Cobertura de líneas >= 80 % (Req. 5.1) ──────────────────────
+      - name: Ejecutar pruebas con cobertura
+        run: npm test -- --coverage
+        # jest.config.js incluye coverageThreshold global.lines=80;
+        # Jest devuelve exit code != 0 si el umbral no se alcanza.
+
+      # ── Gate 2: SCA — vulnerabilidades altas o críticas (Req. 5.2) ──────────
+      - name: Auditoría de dependencias (SCA)
+        run: npm audit --audit-level=high
+
+      # ── Gate 3: Detección de secretos con Gitleaks (Req. 5.3) ───────────────
+      - name: Escaneo de secretos (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+      # ── Gate 4 (Opcional SAST): njsscan (ver design.md § 6) ─────────────────
+      - name: SAST — njsscan
+        run: |
+          pip install njsscan --quiet
+          njsscan --exit-warning src/
