@@ -14,9 +14,45 @@
 | **4.2** Elemento no-string → `400` | `tests/habilitados-validacion.test.js`: elementos numéricos/nulos/objetos → `400` (`MENSAJES.elemento`) | Bloquea (test red) | `npm test` (local y CI) | — | Commit `36afd92`: chequeo `typeof codigo !== 'string'` |
 | **4.3** Cuerpo no-JSON o campo faltante → `400` | `tests/habilitados-validacion.test.js` (cuerpo `undefined`/`null`/arreglo/`{}` → `400`) + `tests/habilitados-integracion.test.js` (cuerpo vacío y sin campo) | Bloquea (test red) | `npm test` (local y CI) | — | Commit `36afd92`: `MENSAJES.cuerpo` + `express.json()` con manejo |
 | **5.1** Cobertura de líneas `src/` >= 80 % | `jest.config.js` → `coverageThreshold.global.lines: 80` + CI step "Ejecutar pruebas con cobertura" (exit != 0 si no alcanza) | Bloquea (pipeline red) | CI (push/PR a `main`) | Estado previo al commit `5111fd4`: pipeline base sin gate de cobertura | Commit `41765f0`: umbral 80 % en `jest.config.js` y `ci.yml`; run en verde con `>= 80 %` |
-| **5.2** `npm audit` sin vulnerabilidades altas/críticas | `ci.yml` step "Auditoría de dependencias (SCA)": `npm audit --audit-level=high` | Bloquea (pipeline red) | CI (push/PR a `main`) | — | `npm audit --audit-level=high` pasa con 0 vulnerabilidades altas/críticas |
-| **5.3** Escaneo de secretos antes del merge | `ci.yml` step "Escaneo de secretos (Gitleaks)": `gitleaks/gitleaks-action@v2` con `fetch-depth: 0` | Bloquea (pipeline red) | CI (push/PR a `main`) | — | Run en verde; `config/ejemplo.env` contiene solo valores de ejemplo (ver `.gitleaksignore`) |
+| **5.2** `npm audit` sin vulnerabilidades altas/críticas | `ci.yml` step "Auditoría de dependencias (SCA)": `npm audit --audit-level=high` | Bloquea (pipeline red) | CI (push/PR a `main`) | Run #2 (commit `9a9413f`, main): `lodash@4.17.20` con 4 advisories HIGH (Command Injection, ReDoS, Code Injection, Prototype Pollution) → exit code ≠ 0 | Run #4 (commit `7f0e39c`, main) en verde con `lodash@^4.18.1`: 0 vulnerabilidades high/critical |
+| **5.3** Escaneo de secretos antes del merge | `ci.yml` step "Escaneo de secretos (Gitleaks)": `gitleaks/gitleaks-action@v2` con `fetch-depth: 0` | Bloquea (pipeline red) | CI (push/PR a `main`) | — | Run #4 (main) en verde: gitleaks sin hallazgos; `config/ejemplo.env` contiene solo valores de ejemplo (ver `.gitleaksignore`) |
 | **5.4** Suite completa en verde antes del merge | CI step "Ejecutar pruebas con cobertura": todos los tests de Req. 1–4 (`habilitados.test.js`, `habilitados-validacion.test.js`, `habilitados-integracion.test.js`, `cursos.test.js`, `errores.test.js`, `health.test.js`, `repositorio.test.js`) | Bloquea (pipeline red) | CI (push/PR a `main`) | Estado previo (commit `28d300f`): no existía `POST /habilitados` → cualquier POST devolvía `404` | Commits `36afd92`→`41765f0`: `200`/`400`/`413`/`500` según el caso, suite completa en verde |
+
+---
+
+## Evidencia de runs de CI en main
+
+### Run en rojo — Run #2 (commit `9a9413f`, main)
+
+**URL:** https://github.com/lalvitesg/INF384-lab6-20221943/actions/runs/45906348072
+
+**Causa del fallo:** Gate 2 SCA (`npm audit --audit-level=high`) falló porque `package.json` declaraba `lodash@4.17.20`, que tiene 1 vulnerabilidad HIGH documentada:
+
+- `GHSA-35jh-r3h4-6jhm` — Command Injection en `lodash`
+- `GHSA-29mw-wpgm-hmr9` — ReDoS en `lodash`
+- `GHSA-r5fr-rjxr-66jc` — Code Injection vía `_.template`
+- `GHSA-xxjr-mmjv-4gpg` — Prototype Pollution en `_.unset`, `_.omit`, `_.pullAt`
+
+`npm audit --audit-level=high` retornó exit code ≠ 0, lo que bloqueó el pipeline en la etapa SCA antes de llegar a Gitleaks y SAST.
+
+**Corrección:** se actualizó la dependencia a `lodash@^4.18.1` (commit `58e1760`, PR #2). La versión 4.18.1 no tiene vulnerabilidades reportadas de severidad high/critical.
+
+### Último run en verde — Run #4 (commit `7f0e39c`, main)
+
+**URL:** https://github.com/lalvitesg/INF384-lab6-20221943/actions/runs/45906624988
+
+**Trigger:** merge del PR #2 (`feat/lab` → `main`) con `lodash@^4.18.1`.
+
+**Resultado de cada gate:**
+
+| Gate | Resultado |
+|------|-----------|
+| Gate 1 — Cobertura >= 80 % | ✅ pasa (76 tests, cobertura de líneas > 80 %) |
+| Gate 2 — SCA `npm audit --audit-level=high` | ✅ pasa (0 vulnerabilidades high/critical) |
+| Gate 3 — Secretos Gitleaks | ✅ pasa (0 hallazgos reales; `config/ejemplo.env` no contiene credenciales) |
+| Gate 4 — SAST njsscan | ✅ pasa (`njsscan --exit-warning src/` sin hallazgos bloqueantes) |
+
+---
 
 ### SAST (opcional, +1 pt)
 
